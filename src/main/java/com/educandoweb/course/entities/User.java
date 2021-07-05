@@ -3,9 +3,19 @@ package com.educandoweb.course.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
+@Entity
 public class User implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+	@Id//chave primaria do banco de dados
+	@GeneratedValue(strategy = GenerationType.IDENTITY)//informa para ojpa que é auto incrementavio
 	
 	private Long id;
 	private String name;
