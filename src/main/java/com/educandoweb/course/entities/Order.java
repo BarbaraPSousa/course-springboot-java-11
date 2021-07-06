@@ -12,31 +12,35 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
-@Table(name = "tb_order")//nome da tabela
-public class Order implements Serializable{
+@Table(name = "tb_order") // nome da tabela
+public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment;
-	
-	@ManyToOne//informando que é chave estrangera
-	@JoinColumn(name = "client_id")//nome da chave estrangera
-	private User client;//associação de orde para usuario *
-	
-	public Order() {	
+
+	@ManyToOne // informando que é chave estrangera
+	@JoinColumn(name = "client_id") // nome da chave estrangera
+	private User client;// associação de orde para usuario *
+
+	public Order() {
 	}
 
-	public Order(long id, Instant moment, User client) {
+	public Order(Long id, Instant moment, User client) {
 		super();
 		this.id = id;
 		this.moment = moment;
 		this.client = client;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
