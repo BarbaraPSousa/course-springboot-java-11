@@ -30,7 +30,7 @@ public class User implements Serializable{
 	private String phone;
 	private String password;
 	
-	@JsonIgnore
+	@JsonIgnore//informa que deve ingnorar os pedido para não da erro
 	@OneToMany(mappedBy = "client")//informando q é mapeado por cleinte
 	private List<Order> orders = new ArrayList<>();//associação de usuario para ordem 1
 	
