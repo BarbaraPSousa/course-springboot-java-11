@@ -8,9 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.educandoweb.course.entities.Category;
 import com.educandoweb.course.entities.Order;
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.entities.enums.OrderStatus;
+import com.educandoweb.course.repositories.CategoryRepository;
 import com.educandoweb.course.repositories.OrderRepository;
 import com.educandoweb.course.repositories.UserRepository;
 
@@ -18,16 +20,25 @@ import com.educandoweb.course.repositories.UserRepository;
 @Profile("test") // informa que só vai roda a configuração quando tiver no perfil de teste.
 public class TestConfig implements CommandLineRunner {
 
-	@Autowired // associa a intacia no test
+	/*injeções de depedencias*/
+	@Autowired 
 	private UserRepository userRepository;
 
 	@Autowired
 	private OrderRepository orderRepository;
 
+	@Autowired
+	private CategoryRepository categoryRepository; 
+	
 	@Override
 	public void run(String... args) throws Exception {// tudo que colocar na função sera executado quando a aplicação
-														// rodar.
-
+		
+		Category cat1 = new Category(null, "Electronics");
+		Category cat2 = new Category(null, "Books");
+		Category cat3 = new Category(null, "Computers");												// rodar.
+		
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		
 		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "169599999", "123456");
 		User u2 = new User(null, "Alex Green", "alex@gmail.com", "179865555", "5297835");
 
