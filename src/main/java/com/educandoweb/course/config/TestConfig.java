@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.educandoweb.course.entities.Category;
 import com.educandoweb.course.entities.Order;
+import com.educandoweb.course.entities.Payment;
 import com.educandoweb.course.entities.Product;
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.entities.enums.OrderStatus;
@@ -71,6 +72,13 @@ public class TestConfig implements CommandLineRunner {
 	
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+		
+		/*inserindo pagamento*/
+		Payment pay1 = new Payment(null, Instant.parse("2021-06-20T19:53:07Z"), o1);
+		/*salvando pagemento */
+		o1.setPayment(pay1);//associação de mão dupla em memoria
+		
+		orderRepository.save(o1);
 
 	}
 }

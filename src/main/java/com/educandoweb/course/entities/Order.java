@@ -3,12 +3,14 @@ package com.educandoweb.course.entities;
 import java.io.Serializable;
 import java.time.Instant;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.educandoweb.course.entities.enums.OrderStatus;
@@ -32,6 +34,9 @@ public class Order implements Serializable {
 	@JoinColumn(name = "client_id") // nome da chave estrangera
 	private User client;// associação de orde para usuario *
 
+	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)//mapeando 1 p/ 1 com o msmo ID
+	private Payment payment;
+	
 	public Order() {
 	}
 
@@ -57,6 +62,14 @@ public class Order implements Serializable {
 
 	public void setMoment(Instant moment) {
 		this.moment = moment;
+	}
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
 	}
 
 	public OrderStatus getOrderStatus() {
