@@ -2,6 +2,8 @@ package com.educandoweb.course.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -34,6 +37,9 @@ public class Order implements Serializable {
 	@JoinColumn(name = "client_id") // nome da chave estrangera
 	private User client;// associação de orde para usuario *
 
+	@OneToMany(mappedBy = "id.order")//mapeando id junto com order
+	private Set<OrderItem> items = new HashSet<>();
+	
 	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)//mapeando 1 p/ 1 com o msmo ID
 	private Payment payment;
 	
@@ -88,6 +94,10 @@ public class Order implements Serializable {
 
 	public void setClient(User client) {
 		this.client = client;
+	}
+
+	public Set<OrderItem> getItems() {
+		return items;
 	}
 	
 	@Override
