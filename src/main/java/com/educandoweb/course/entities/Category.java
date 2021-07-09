@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_category")
@@ -24,7 +24,7 @@ public class Category implements Serializable{
 	private Long id;
 	private String name;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties("categories")
 	@ManyToMany(mappedBy = "categories")
 	private Set<Product> products = new HashSet<>();//é intanciada para garanti que não inicie vazia
 	
