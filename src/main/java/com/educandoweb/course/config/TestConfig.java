@@ -81,9 +81,11 @@ public class TestConfig implements CommandLineRunner {
 
 		/* inserindo pagamento */
 		Payment pay1 = new Payment(null, Instant.parse("2021-06-20T19:53:07Z"), o1);
+		
 		/* salvando pagemento no banco de dados*/
 		o1.setPayment(pay1);// associação de mão dupla em memoria
-		orderRepository.save(o1);
+		
+		orderRepository.save(o1);//salvando no banco de dados
 
 		/*Sedd do banco de dados*/
 		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());

@@ -70,14 +70,6 @@ public class Order implements Serializable {
 		this.moment = moment;
 	}
 
-	public Payment getPayment() {
-		return payment;
-	}
-
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
-
 	public OrderStatus getOrderStatus() {
 		return OrderStatus.valueOf(orderStatus);//convertendo o numero inteiro para orderStatus
 	}
@@ -94,6 +86,14 @@ public class Order implements Serializable {
 
 	public void setClient(User client) {
 		this.client = client;
+	}
+
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
 	}
 
 	public Set<OrderItem> getItems() {
