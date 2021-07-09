@@ -16,11 +16,11 @@ public class UserService {
 	private UserRepository repository;
 	
 	public List<User> findAll(){//retorna todos os usuarios do banco de dados
-		return repository.findAll();
+		return repository.findAll(); 
 	}
 	
 	public User findById(Long id) {//retorna todos os usuarios por id
-		Optional<User> obj = repository.findById(id);
+		Optional<User> obj = repository.findById(id); //tras o bjs do banco de dados
 		return obj.get();
 	}
 	
@@ -31,5 +31,17 @@ public class UserService {
 	public void delete(Long id) {// deleta Usuario com o Id
 		repository.deleteById(id);
 		
+	}
+	
+	public User update(Long id, User obj) {//atualizando usuario passando id
+		User entity = repository.getById(id);
+		update(entity, obj);
+		return repository.save(entity);
+	}
+
+	private void update(User entity, User obj) {
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setPhone(obj.getPhone());
 	}
 }
