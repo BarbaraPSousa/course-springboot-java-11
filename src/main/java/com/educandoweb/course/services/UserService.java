@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.repositories.UserRepository;
+import com.educandoweb.course.services.exceptions.ResourceNotFoundException;
 
 @Service//registando class como serviço
 public class UserService {
@@ -21,7 +22,7 @@ public class UserService {
 	
 	public User findById(Long id) {//retorna todos os usuarios por id
 		Optional<User> obj = repository.findById(id); //tras o bjs do banco de dados
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public User insert(User obj) {// retorna um usoriao cadastrado
@@ -39,7 +40,7 @@ public class UserService {
 		return repository.save(entity);
 	}
 
-	private void update(User entity, User obj) {
+	private void update(User entity, User obj) {//retorna os dados atualizados com base no q foi passado no obj
 		entity.setName(obj.getName());
 		entity.setEmail(obj.getEmail());
 		entity.setPhone(obj.getPhone());
